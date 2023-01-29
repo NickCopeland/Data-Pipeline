@@ -26,6 +26,13 @@ post_dict = (
     "stickied",
 )
 
+# Read credentials from file
+script_path = pathlib.Path(__file__).parent.resolve()
+parser = configparser.ConfigParser()
+parser.read(f"{script_path}/credentials.ini")
+cred_secret = parser.get("reddit_credentials", "secret")
+cred_client_id = parser.get("reddit_credentials", "client_id")
+
 def start_log():
     """Start of log file"""
     #logging.info("----------------Start of Log----------------")
@@ -54,14 +61,6 @@ def main():
     # Process start time
     startStamp = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
     print(startStamp + ": " + __file__ + " started")
-
-
-    # Read credentials from file
-    script_path = pathlib.Path(__file__).parent.resolve()
-    parser = configparser.ConfigParser()
-    parser.read(f"{script_path}/credentials.ini")
-    cred_secret = parser.get("reddit_credentials", "secret")
-    cred_client_id = parser.get("reddit_credentials", "client_id")
 
 
     # Connect to the Reddit API using PRAW
