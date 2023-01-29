@@ -4,6 +4,7 @@ import pandas as pd
 import praw
 import configparser
 import pathlib
+import numpy as np
 """
 Use Reddit API to retrieve data and export to csv
 """
@@ -59,8 +60,8 @@ def connect_api():
 def main():
     """Extract data from Reddit to CSV"""
     # Process start time
-    startStamp = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
-    print(startStamp + ": " + __file__ + " started")
+    start_stamp = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
+    print(start_stamp + ": " + __file__ + " started")
 
 
     # Connect to the Reddit API using PRAW
@@ -82,7 +83,14 @@ def main():
         fields.append(sub_dict)
         posts_df = pd.DataFrame(fields)
 
-    
+    # transform data
+    posts_df["created_utc"] = pd.to_datetime(posts_df["created_utc"], unit="s")
+    posts_df["over_18"] = np.where((posts_df["over_18"] == "False") | (posts_df["over_18"] == False), False, True).astype(bool)
+    posts_df["edited"] = np.where((posts_df["edited"] == "False") | (posts_df["edited"] == False), False, True).astype(bool)
+    posts_df["spoiler"] = np.where((posts_df["spoiler"] == "False") | (posts_df["spoiler"] == False), False, True).astype(bool)
+    posts_df["stickied"] = np.where((posts_df["stickied"] == "False") | (posts_df["stickied"] == False), False, True).astype(bool)
+
+
     # Use this for local machine testing
     output = __file__.replace(".py", ".csv")
     posts_df.to_csv(output, index=False)
