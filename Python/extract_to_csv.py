@@ -49,49 +49,51 @@ def connect_api():
     praw_inst = praw.Reddit(client_id=cred_client_id, client_secret=cred_secret, user_agent="Data_Pipeline_Agent")
     return praw_inst
 
+def main():
+    """Extract data from Reddit to CSV"""
+    # Process start time
+    startStamp = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
+    print(startStamp + ": " + __file__ + " started")
+
+
+    # Read credentials from file
+    script_path = pathlib.Path(__file__).parent.resolve()
+    parser = configparser.ConfigParser()
+    parser.read(f"{script_path}/credentials.ini")
+    cred_secret = parser.get("reddit_credentials", "secret")
+    cred_client_id = parser.get("reddit_credentials", "client_id")
+
+
+    # Connect to the Reddit API using PRAW
+    praw_inst = connect_api()
+    
+    
+    # Set subreddit (forum)
+    subreddit = praw_inst.subreddit("dataengineering")
+
+
+    # Retrieve posts
+    posts = subreddit.top(time_filter='day', limit=10)
+
+
+    # Add posts to dataframe
+    for submission in posts:
+        to_dict = vars(submission)
+        sub_dict = {field: to_dict[field] for field in post_dict}
+        fields.append(sub_dict)
+        posts_df = pd.DataFrame(fields)
+
+    
+    # Use this for local machine testing
+    output = __file__.replace(".py", ".csv")
+    posts_df.to_csv(output, index=False)
+
+    # Use this for Airflow
+    #posts_df.to_csv(f"/tmp/{output_name}.csv", index=False)
 
 if __name__ == "__main__":
     try:
-        # Process start time
-        print("Started process")
-        startStamp = datetime.datetime.now().strftime("%Y-%m-%d_%H%M")
-        print(startStamp)
-
-
-        # Read credentials from file
-        script_path = pathlib.Path(__file__).parent.resolve()
-        parser = configparser.ConfigParser()
-        parser.read(f"{script_path}/credentials.ini")
-        cred_secret = parser.get("reddit_credentials", "secret")
-        cred_client_id = parser.get("reddit_credentials", "client_id")
-
-
-        # Connect to the Reddit API using PRAW
-        praw_inst = connect_api()
-        
-        
-        # Set subreddit (forum)
-        subreddit = praw_inst.subreddit("dataengineering")
-
-
-        # Retrieve posts
-        posts = subreddit.top(time_filter='day', limit=10)
-
-
-        # Add posts to dataframe
-        for submission in posts:
-            to_dict = vars(submission)
-            sub_dict = {field: to_dict[field] for field in post_dict}
-            fields.append(sub_dict)
-            posts_df = pd.DataFrame(fields)
-
-        
-        # Use this for local machine testing
-        output = __file__.replace(".py", ".csv")
-        posts_df.to_csv(output, index=False)
-
-        # Use this for Airflow
-        #posts_df.to_csv(f"/tmp/{output_name}.csv", index=False)
+        main()
     
     # Error handling
     except Exception as e:
