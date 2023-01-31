@@ -1,6 +1,4 @@
 # files to ignore
-Python/extract_to_csv.csv
 python/extract_to_csv.csv
-Python/credentials.ini
-python/credentials.ini
 *.conf
+*.ini
