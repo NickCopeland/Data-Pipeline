@@ -2,3 +2,6 @@
 python/extract_to_csv.csv
 *.conf
 *.ini
+terraform/*
+!*.tf
+*.tfvars
