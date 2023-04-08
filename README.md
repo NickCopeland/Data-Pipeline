@@ -2,8 +2,8 @@
 Data pipeline extracting data from Reddit.com with the purpose of data visualization using Power BI.
 
 
-## This project is in progress
-This project is being created to have fun working with AWS and other data engineering tools after earning an AWS Certified Developer - Associate certification.
+## Why I made this
+This project was created to have fun working with AWS and other data engineering tools after earning an AWS Certified Developer - Associate certification.
 
 
 ## Tools
