@@ -1,5 +1,5 @@
 # Data-Pipeline
-Data pipeline extracting data from Reddit.com with the purpose of data visualization using Power BI.
+Data pipeline extracting data from Reddit.com/r/dataengineering with the purpose of data visualization using Power BI.
 
 
 ## Why I made this
