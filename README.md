@@ -19,4 +19,4 @@ This project was created to have fun working with AWS and other data engineering
 ## Requirements
 [Docker](https://docs.docker.com/get-docker/)
 
-[Docker Compose](https://docs.docker.com/compose/install/)
+
