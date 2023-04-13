@@ -34,13 +34,6 @@ parser.read(f"{script_path}/credentials.ini")
 cred_secret = parser.get("reddit_credentials", "secret")
 cred_client_id = parser.get("reddit_credentials", "client_id")
 
-def start_log():
-    """Start of log file"""
-    #logging.info("----------------Start of Log----------------")
-
-def end_log():
-    """End of log file"""
-    #logging.info("----------------End of Log------------------")
 
 def logp(s):
     """Print and write a string to the log"""
@@ -83,20 +76,11 @@ def main():
         fields.append(sub_dict)
         posts_df = pd.DataFrame(fields)
 
-    # transform data
-    posts_df["created_utc"] = pd.to_datetime(posts_df["created_utc"], unit="s")
-    posts_df["over_18"] = np.where((posts_df["over_18"] == "False") | (posts_df["over_18"] == False), False, True).astype(bool)
-    posts_df["edited"] = np.where((posts_df["edited"] == "False") | (posts_df["edited"] == False), False, True).astype(bool)
-    posts_df["spoiler"] = np.where((posts_df["spoiler"] == "False") | (posts_df["spoiler"] == False), False, True).astype(bool)
-    posts_df["stickied"] = np.where((posts_df["stickied"] == "False") | (posts_df["stickied"] == False), False, True).astype(bool)
-
 
     # Use this for local machine testing
     output = __file__.replace(".py", ".csv")
     posts_df.to_csv(output, index=False)
 
-    # Use this for Airflow
-    #posts_df.to_csv(f"/tmp/{output_name}.csv", index=False)
 
 if __name__ == "__main__":
     try:
