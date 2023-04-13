@@ -40,21 +40,12 @@ def main():
 
 def create_bucket_if_needed(s3):
     """Create the bucket if needed"""
-    exists = True
     try:
         s3.meta.client.head_bucket(Bucket=s3_bucket)
     except botocore.exceptions.ClientError as e:
         error_code = e.response["Error"]["Code"]
         if error_code == "404":
             logger.error("bucket doesn't exist")
-            exists = False
-    if not exists:
-        logger.error("trying to create bucket")
-        s3.create_bucket(
-            Bucket=s3_bucket,
-            CreateBucketConfiguration={"LocationConstraint": region},
-        )
-
 
 
 if __name__ == "__main__":
