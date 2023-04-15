@@ -29,7 +29,7 @@ role_string = "arn:aws:iam::" + account_id + ":role/" + redshift_role
 
 
 # Store SQL Queries in strings
-drop_table = "DROP TABLE " + table_name + " IF EXISTS;"
+drop_table = "DROP TABLE IF EXISTS " + table_name + ";"
 create_table_final = "CREATE TABLE IF NOT EXISTS " + table_name + """ (
             id varchar PRIMARY KEY,
             title varchar(max),
@@ -48,7 +48,7 @@ create_table_staging = "CREATE TEMP TABLE " + staging_table + " (LIKE " + table_
 load_table_staging = "COPY " + staging_table + " FROM '" + file_path + "' iam_role '" + role_string + "' IGNOREHEADER 1 DELIMITER ',' CSV;"
 remove_duplicates = "DELETE FROM " + table_name + " USING " + staging_table + " WHERE " + table_name + ".id = " + staging_table + ".id;"
 load_table_final = "INSERT INTO " + table_name + " SELECT * FROM " + staging_table + ";"
-drop_staging_table = "DROP TABLE " + staging_table + " IF EXISTS;"
+drop_staging_table = "DROP TABLE IF EXISTS " + staging_table + ";"
 
 
 def main():
