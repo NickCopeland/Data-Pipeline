@@ -60,7 +60,7 @@ Create this .sql file in the models folder
     FROM Data_Engineering
 
 # schema.yml
-create this .yml file in the models folder
+Create this .yml file in the models folder
 
     version: 2
 
