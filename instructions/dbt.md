@@ -1,6 +1,6 @@
 
 # Go to DBT website
-[link](https://www.getdbt.com/)
+[DBT website](https://www.getdbt.com/)
 
 # Set up
 Create a free tier account and connect to your Redshift database. 
@@ -46,6 +46,7 @@ Create a project and locate the models folder. Delete the examples folder in the
 
 # data_engineering_transformed.sql
 Create this .sql file in the models folder
+
     SELECT 
     id
     , title
@@ -60,6 +61,7 @@ Create this .sql file in the models folder
 
 # schema.yml
 create this .yml file in the models folder
+
     version: 2
 
     models:
