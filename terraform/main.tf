@@ -27,10 +27,10 @@ resource "aws_s3_bucket_acl" "s3_data-pipeline-bucket_acl" {
   acl    = "private"
 }
 
-# Create S3 Read only access role. This is assigned to Redshift cluster so that it can read data from S3
+# Create S3 read & write access role. This is assigned to Redshift cluster so that it can read data from S3. Write access needed for unloading data back to S3
 resource "aws_iam_role" "redshift_role" {
   name = "prod_redshift_role"
-  managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"]
+  managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonS3FullAccess"]
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
