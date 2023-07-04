@@ -66,7 +66,7 @@ def main():
 
 
     # Retrieve posts
-    posts = subreddit.top(time_filter='day', limit=10)
+    posts = subreddit.top(time_filter='month', limit=1000)
 
 
     # Add posts to dataframe
