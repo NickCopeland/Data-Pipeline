@@ -44,10 +44,11 @@ def main():
     sql_string = "UNLOAD ('SELECT * FROM " + table_name + """')
         TO '""" + unload_destination + """'
         iam_role 'arn:aws:iam::""" + account_id + ":role/" + redshift_role + """'
-        region 'us-west-1'
+        REGION 'us-west-1'
         CSV
         ALLOWOVERWRITE
-        parallel off"""
+        PARALLEL OFF
+        HEADER;"""
     cur.execute(sql_string)
     conn.commit()
     conn.close()
