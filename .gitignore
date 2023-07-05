@@ -1,0 +1,17 @@
+# files to ignore
+python/extract_to_csv.csv
+*.conf
+*.ini
+terraform/*
+!*.tf
+*.tfvars
+*.csv
+airflow/extraction/*.csv
+airflow/dags/__pycache__
+airflow/plugins/*
+airflow/logs/*
+airflow/extracts/*
+airflow/include/*
+airflow/.env
+airflow/.DS_Store
+__pycache__
