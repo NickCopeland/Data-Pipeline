@@ -15,8 +15,7 @@ This project was created to have fun working with AWS and other data engineering
 6. [Airflow](https://airflow.apache.org) via [Docker](https://www.docker.com)
 
 ## Dashboard
-![image](https://github.com/NickCopeland/Data-Pipeline/tree/main/images/Reddit_AWS_Pipeline.png?raw=true)
-
+[<img src="https://github.com/NickCopeland/Data-Pipeline/blob/main/images/Reddit_AWS_Pipeline.png" >](https://lookerstudio.google.com/u/0/reporting/ec0e0fe0-d61e-4ade-a4d5-200b1d290a2c/page/fUvMD)
 
 ## Required downloads
 [Docker Desktop](https://docs.docker.com/get-docker/)
