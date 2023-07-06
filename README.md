@@ -14,6 +14,8 @@ This project was created to have fun working with AWS and other data engineering
 5. [Looker Studio](https://lookerstudio.google.com)
 6. [Airflow](https://airflow.apache.org) via [Docker](https://www.docker.com)
 
+## Dashboard
+![image](https://github.com/NickCopeland/Data-Pipeline/tree/main/images/Reddit_AWS_Pipeline.png?raw=true)
 
 
 ## Required downloads
